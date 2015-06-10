@@ -14,14 +14,24 @@ class NotificationsContainer extends React.Component {
     })
   }
 
-  componentWillMount() {
-    this.props.githubService.getOrganizationIssues('assigned', function(notifications) {
+  getIssues(filter, cb) {
+    this.props.githubService.getOrganizationIssues(filter, cb);
+  }
+
+  getAllIssues() {
+    this.getIssues('assigned', function(notifications) {
       this.setState({ notifications: this.filterOpenNotifications(notifications) });
     }.bind(this));
 
-    this.props.githubService.getOrganizationIssues('mentioned', function(notifications) {
+    this.getIssues('mentioned', function(notifications) {
       this.setState({ mentioned: this.filterOpenNotifications(notifications) });
     }.bind(this));
+
+    setTimeout(function() { this.getAllIssues() }.bind(this), 10000);
+  }
+
+  componentWillMount() {
+    this.getAllIssues();
   }
 
   render() {
