@@ -19,11 +19,11 @@ class GithubService {
     this.initGithubService();
   }
 
-  getOrganizationIssues(cb) {
+  getOrganizationIssues(filter, cb) {
     if(this.github == undefined) {
       this.initGithubService();
     }
-    this.github.orgIssues('Wolox', function(err, issues) {
+    this.github.orgIssues('Wolox', filter, function(err, issues) {
       console.log(issues);
       cb(issues);
     });

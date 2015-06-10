@@ -55,11 +55,11 @@ header
 .content
   padding: 1em
 
-.octicon.octicon-git-pull-request
+.octicon.octicon-git-pull-request, .octicon.octicon-chevron-right
   font-size: 25px;
 
 .octicon.octicon-git-pull-request.open
-  color: green
+  color: #6cc644
 
 .octicon.octicon-git-pull-request.merged
   color: #9e157c
@@ -69,6 +69,11 @@ header
 
   li.notification
     height: 45px
+
+    .view-detail-button
+      width: 10%
+      display: inline-block
+      vertical-align: middle
 
     .icon-container
       display: inline-block
@@ -80,7 +85,7 @@ header
     .notification-content
       display: inline-block
       vertical-align: middle
-      width: 85%
+      width: 75%
 
       .repo
         color: #818189;
@@ -89,7 +94,9 @@ header
         clear: both;
 
       .pr-name
-        font-weight: bold
+        a
+          font-weight: bold
+          color: black
 
 
   li:not(:last-child)
