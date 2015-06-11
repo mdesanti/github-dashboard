@@ -6,9 +6,35 @@ class NotificationElement extends React.Component {
     super(props);
   }
 
+  getOrganization() {
+    var owner = this.props.notification.repository.owner;
+    if (owner.type == 'Organization') {
+      return owner.login;
+    } else {
+      return '';
+    }
+  }
+
+  getRepoName() {
+    return this.props.notification.repository.name;
+  }
+
+  getPullRequestNumber() {
+    var splitted = this.props.notification.pull_request.url.split('/');
+    return splitted[splitted.length - 1];
+  }
+
+  handleClick() {
+    this.props.onPullRequestSelected({
+      organization: this.getOrganization(),
+      repo: this.getRepoName(),
+      pullRequestNumber: this.getPullRequestNumber()
+    })
+  }
+
   render() {
     return (
-      <li className="notification">
+      <li className="notification" onClick={ this.handleClick.bind(this) }>
         <div className="icon-container">
           <div className="octicon octicon-git-pull-request open icon"/>
         </div>

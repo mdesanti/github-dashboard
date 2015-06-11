@@ -64,48 +64,89 @@ header
 .octicon.octicon-git-pull-request.merged
   color: #9e157c
 
-#notifications-list
-  width: 300px;
+.pull-request-container
+  display: inline-block
+  vertical-align: top
+  padding-left: 20px
+  width: 75%
 
-  li.notification
-    height: 45px
+  img.loading
+    width: 130px;
+    margin: 0 auto;
+    display: block;
+    margin-top: 15%;
 
-    .view-detail-button
-      width: 10%
-      display: inline-block
-      vertical-align: middle
+  .pull-request
+    .pull-request-title-container
+      font-size: 25px
 
-    .icon-container
-      display: inline-block
-      vertical-align: middle
-      width: 15%
+      .icons
+        vertical-align: middle
+        font-size: 17px
+        background: #6cc644
+        display: inline-block
+        color: #ffffff
+        padding: 0 6px
 
-    list-style-type: none;
+        .open
+          font-size: 17px
+          color: #ffffff
+      .title
+        margin-left: 35px;
+        vertical-align: middle
+        color: #000000
+      .number
+        vertical-align: middle
+        color: rgb(170, 170, 170);
+        margin-left: 20px
 
-    .notification-content
-      display: inline-block
-      vertical-align: middle
-      width: 75%
+.notifications-container
+  display: inline-block
+  vertical-align: middle
+  width: 25%
 
-      .repo
-        color: #818189;
-        font-size: .9em;
-        float: left;
-        clear: both;
+  #notifications-list
+    width: 300px;
 
-      .pr-name
-        a
-          font-weight: bold
-          color: black
+    li.notification
+      height: 45px
+
+      .view-detail-button
+        width: 10%
+        display: inline-block
+        vertical-align: middle
+
+      .icon-container
+        display: inline-block
+        vertical-align: middle
+        width: 15%
+
+      list-style-type: none;
+
+      .notification-content
+        display: inline-block
+        vertical-align: middle
+        width: 75%
+
+        .repo
+          color: #818189;
+          font-size: .9em;
+          float: left;
+          clear: both;
+
+        .pr-name
+          a
+            font-weight: bold
+            color: black
 
 
-  li:not(:last-child)
-    position: relative;
-    border: 1px solid transparent;
-    border-bottom-color: #ebf0f0;
+    li:not(:last-child)
+      position: relative;
+      border: 1px solid transparent;
+      border-bottom-color: #ebf0f0;
 
-  li:not(:first-child)
-    margin-top: 5px;
+    li:not(:first-child)
+      margin-top: 5px;
 
 
 

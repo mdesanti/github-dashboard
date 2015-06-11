@@ -1,7 +1,6 @@
 import React from 'react';
 import NotificationsContainer from '../components/notificationsContainer.jsx';
-import ItemStore from '../stores/itemStore';
-import ItemActions from '../actions/itemActions';
+import PullRequestInformation from '../components/pullRequestInformation.jsx';
 import GithuService from '../services/githubService.js'
 
 class Home extends React.Component {
@@ -10,28 +9,29 @@ class Home extends React.Component {
     super(props);
     this.state = {
       items : [],
-      loading: false
+      loading: false,
+      selectedPullRequest: {},
+      githubService: new GithuService()
     };
-  }
-
-  componentDidMount() {
-    this.unsubscribe = ItemStore.listen(this.onStatusChange.bind(this));
-    ItemActions.loadItems();
   }
 
   componentWillUnmount() {
     this.unsubscribe();
   }
 
-  onStatusChange(state) {
-    this.setState(state);
+  pullRequestSelected(pullRequestData) {
+    this.setState({ selectedPullRequest: pullRequestData })
   }
 
   render() {
-
     return (
       <div>
-        <NotificationsContainer githubService={new GithuService()} />
+        <div className="notifications-container">
+          <NotificationsContainer onPullRequestSelected={ this.pullRequestSelected.bind(this) } githubService={ this.state.githubService } />
+        </div>
+        <div className="pull-request-container">
+          <PullRequestInformation pullRequestInformation={ this.state.selectedPullRequest } githubService={ this.state.githubService }/>
+        </div>
       </div>
     );
   }

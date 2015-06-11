@@ -1,5 +1,5 @@
 import React from 'react';
-import NotificationElement from './notificationElement.jsx';
+import NotificationsList from './notificationsList.jsx';
 
 class NotificationsContainer extends React.Component {
 
@@ -27,7 +27,7 @@ class NotificationsContainer extends React.Component {
       this.setState({ mentioned: this.filterOpenNotifications(notifications) });
     }.bind(this));
 
-    setTimeout(function() { this.getAllIssues() }.bind(this), 10000);
+    setTimeout(function() { this.getAllIssues() }.bind(this), 60000);
   }
 
   componentWillMount() {
@@ -37,19 +37,10 @@ class NotificationsContainer extends React.Component {
   render() {
     return (
       <div>
-        <h1> Pull Requests </h1>
         <h3> Assigned </h3>
-        <ul id="notifications-list">
-          { this.state.notifications.map(function(notification) {
-            return <NotificationElement key={notification.id} notification={ notification }/>;
-          })}
-        </ul>
+        <NotificationsList onPullRequestSelected={ this.props.onPullRequestSelected } notifications={ this.state.notifications }/>
         <h3> Mentioned </h3>
-        <ul id="notifications-list">
-          { this.state.mentioned.map(function(notification) {
-            return <NotificationElement key={notification.id} notification={ notification }/>;
-          })}
-        </ul>
+        <NotificationsList onPullRequestSelected={ this.props.onPullRequestSelected } notifications={ this.state.mentioned }/>
       </div>
     );
   }

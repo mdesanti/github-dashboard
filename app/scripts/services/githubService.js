@@ -10,7 +10,7 @@ class GithubService {
           token: this.accessToken,
           auth: 'oauth'
         });
-        this.github = this.github.getUser();
+        this.user = this.github.getUser();
       }
     }
   }
@@ -23,10 +23,20 @@ class GithubService {
     if(this.github == undefined) {
       this.initGithubService();
     }
-    this.github.orgIssues('Wolox', filter, function(err, issues) {
+    this.user.orgIssues('Wolox', filter, function(err, issues) {
       console.log(issues);
       cb(issues);
     });
+  }
+
+  getPullRequestData(org, repo, pullRequestNumber, cb) {
+    var repo = this.github.getRepo(org, repo);
+    repo.getPull(pullRequestNumber, function(err, pullRequestInfo) { cb(pullRequestInfo) });
+  }
+
+  getIssueComments(org, repo, number, cb) {
+    var repo = this.github.getRepo(org, repo);
+    repo.getPullComments(number, cb);
   }
 }
 
