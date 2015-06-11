@@ -24,11 +24,17 @@ class NotificationElement extends React.Component {
     return splitted[splitted.length - 1];
   }
 
+  getIssueNumber() {
+    var splitted = this.props.notification.comments_url.split('/');
+    return splitted[splitted.length - 2];
+  }
+
   handleClick() {
     this.props.onPullRequestSelected({
       organization: this.getOrganization(),
       repo: this.getRepoName(),
-      pullRequestNumber: this.getPullRequestNumber()
+      pullRequestNumber: this.getPullRequestNumber(),
+      issueNumber: this.getIssueNumber()
     })
   }
 

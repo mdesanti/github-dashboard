@@ -1,5 +1,6 @@
 import React from 'react';
 import PullRequestTitle from './pullRequests/pullRequestTitle.jsx';
+import PullRequestCommentsList from './pullRequests/pullRequestCommentsList.jsx';
 
 class PullRequestInformation extends React.Component {
 
@@ -14,14 +15,11 @@ class PullRequestInformation extends React.Component {
   componentWillReceiveProps(nextProps) {
     var prInfo = nextProps.pullRequestInformation;
     this.setState({ loading: true });
-    console.log('a')
-    this.props.githubService.getIssueComments(prInfo.organization, prInfo.repo, prInfo.pullRequestNumber, function(response) { console.log(response) })
     this.props.githubService.getPullRequestData(
       prInfo.organization,
       prInfo.repo,
       prInfo.pullRequestNumber,
       function(response) {
-        console.log(response);
         this.setState({ pullRequestData: response, loading: false });
       }.bind(this)
     )
@@ -36,6 +34,7 @@ class PullRequestInformation extends React.Component {
       return (
         <div className="pull-request">
           <PullRequestTitle data={ this.state.pullRequestData }/>
+          <PullRequestCommentsList data={ this.props.pullRequestInformation } githubService={ this.props.githubService } />
         </div>
       )
     }
